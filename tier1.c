@@ -1,4 +1,4 @@
-#include "p1s.h"
+#include "tier1.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -6,7 +6,7 @@
 #include <assert.h>
 #include <stdint.h>
 
-#include "tier1.h"
+#include "p1s.h"
 
 static uint8_t init_code[] =
 {

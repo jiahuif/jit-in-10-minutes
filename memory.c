@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-#if defined (unix)
+#if defined (__unix__)
 #include <unistd.h>
 #include <sys/mman.h>
 #elif defined (WINDOWS)

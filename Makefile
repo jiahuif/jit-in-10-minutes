@@ -1,6 +1,6 @@
 CC = gcc
 RM = rm -f
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -std=gnu99
 LDFLAGS = 
 
 all: p1s
