@@ -31,6 +31,9 @@ struct code_block * create_code_block();
 void destroy_code_block(struct code_block * block);
 void * make_block_executable(struct code_block * block);
 
+/* code generation functions */
+void emit(struct code_block * block, uint8_t * code, size_t length);
+
 /* common types */
 typedef int64_t (*GeneratedFunction)(int64_t);
 typedef int64_t * (*code_generator)(struct code_block *, int64_t *);

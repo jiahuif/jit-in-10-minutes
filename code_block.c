@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
-
 void * make_block_executable(struct code_block * block)
 {
     size_t size = ROUND_TO_PAGE(block->length); // round up to nearest page size

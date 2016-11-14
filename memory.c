@@ -20,12 +20,13 @@ void * alloc_page(size_t size)
     return ptr;
 }
 
-void free_page(void * ptr, size_t size)  {
-	if (munmap(ptr, size) == -1)
-        {
-            perror("munmap");
-            exit(EXIT_FAILURE);
-        }
+void free_page(void * ptr, size_t size)
+{
+    if (munmap(ptr, size) == -1)
+    {
+        perror("munmap");
+        exit(EXIT_FAILURE);
+    }
 }
 
 void protect_page(void * ptr, size_t size)
