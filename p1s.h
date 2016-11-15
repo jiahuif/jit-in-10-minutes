@@ -1,12 +1,12 @@
 #ifndef P1S_H_
 #define P1S_H_
 
-#if !defined(__x86_64__) && !defined(_M_AMD64)
-#error This program support amd64 architecture only
+#if !defined(__unix__) && !defined(__APPLE__)
+#error This program support Unix or Unix-like OS only.
 #endif
 
-#ifndef __unix__
-#error This program support Unix or Unix-like OS only.
+#if !defined(__x86_64__) && !defined(_M_AMD64)
+#error This program support amd64 architecture only
 #endif
 
 #include <stdlib.h>
