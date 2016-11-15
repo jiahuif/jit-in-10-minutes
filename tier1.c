@@ -8,59 +8,6 @@
 
 #include "p1s.h"
 
-static uint8_t init_code[] =
-{
-    0x48, 0xc7, 0xc2, 0x00, 0x00, 0x00, 0x00, // mov $0x0, %rdx
-};
-
-static uint8_t function_call_code[] =
-{
-    0x48, 0x89, 0xd7,                               // mov %rdx, %rdi
-
-    0x48, 0xb8,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // movabs $func, $rax
-    // actual address of $func (8 bytes long)
-    // should be filled at offset +5
-
-    0xff, 0xd0,                                     // callq *%rax
-    0x48, 0x89, 0xc2,                               // mov %rax, %rdx
-};
-
-static uint8_t return_code[] =
-{
-    0x48, 0x89, 0xd0, // mov %rdx, %rax
-    0xc3              // ret
-};
-
-static uint8_t loop_begin_code[] =
-{
-    0x48, 0xb9, 0x00, 0x00, 0x00,       // movabsq    $count,%rcx
-    0x00, 0x00, 0x00, 0x00, 0x00,
-    // actual value of $count (8 bytes signed)
-    // should be filled at offset +2
-
-    0x51,                               // push %rcx
-    0x59,                               // START: pop %rcx
-    0x48, 0xff, 0xc9,                   // dec %rcx
-    0x48, 0x83, 0xf9, 0x00,             // cmp %0x0, %rcx
-
-    0x0f, 0x8c, 0x00, 0x00, 0x00, 0x00, // jl <.END>
-    // actual offset of .END (4 bytes signed)
-    // should be filled at offset +21
-
-    0x51                                // push %rcx
-};
-
-static uint8_t loop_end_code[] =
-{
-    0xe9, 0x00, 0x00, 0x00, 0x00, // jmp <.START>
-    // actual offset of .START (4 bytes signed)
-    // should be filled at offset + 1
-
-    0x90                          // END: nop
-};
-
-
 static code_generator loop_processor, instruction_generator;
 
 static int64_t * create_loop(struct code_block * block, int64_t * byte_code)

@@ -5,6 +5,10 @@
 #error This program support amd64 architecture only
 #endif
 
+#ifndef __unix__
+#error This program support Unix or Unix-like OS only.
+#endif
+
 #include <stdlib.h>
 #include <stdint.h>
 
@@ -33,6 +37,13 @@ void * make_block_executable(struct code_block * block);
 
 /* code generation functions */
 void emit(struct code_block * block, uint8_t * code, size_t length);
+
+/* code generation data */
+extern uint8_t init_code[7];
+extern uint8_t function_call_code[18];
+extern uint8_t return_code[4];
+extern uint8_t loop_begin_code[26];
+extern uint8_t loop_end_code[6];
 
 /* common types */
 typedef int64_t (*GeneratedFunction)(int64_t);
