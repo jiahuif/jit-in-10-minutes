@@ -15,10 +15,21 @@ int64_t incr(int64_t x)
     return x + 1;
 }
 
-int main()
+int main(int argc, char ** argv)
 {
     struct code_block * block = create_code_block();
-    int64_t byte_code[] = {2, 10 , 2, 10, 1,  1, 3 , 3, -1};
+	if (argc < 2) {
+		fprintf(stderr, "Usage: %s INFILE\n", argv[0]);
+		return EXIT_FAILURE;
+	}
+	FILE * text_source = fopen(argv[1], "r");
+	if (!text_source) {
+		perror("fopen");
+		return EXIT_FAILURE;
+	}
+    int64_t * byte_code = compile_text_file(text_source);
+	if (!byte_code)
+		return EXIT_FAILURE;
     tier1_generate_function(block, byte_code);
     GeneratedFunction f = (GeneratedFunction) make_block_executable(block);
     printf("%" PRId64 " " "%" PRId64 "\n", f(0), tier0_interpret(byte_code));

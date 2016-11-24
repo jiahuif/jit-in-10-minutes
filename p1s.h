@@ -11,6 +11,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdio.h>
 
 /* memory page related macros */
 #define PAGE_SIZE 4096
@@ -44,6 +45,9 @@ extern uint8_t function_call_code[18];
 extern uint8_t return_code[4];
 extern uint8_t loop_begin_code[26];
 extern uint8_t loop_end_code[6];
+
+/* compilation */
+int64_t * compile_text_file(FILE * f);
 
 /* common types */
 typedef int64_t (*GeneratedFunction)(int64_t);
