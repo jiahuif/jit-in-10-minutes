@@ -13,7 +13,7 @@ You will need a POSIX-compatible x86-64 (a.k.a. amd64) operating system. All pop
 
 Executable Code in Memory
 =============
-To make our system secure, the operating system generally allow only code execution in certain memory pages. 
+To make our system secure, the operating system generally allow code execution only in certain memory pages. To change the access control flag, or canonically `protection flag` ( see `mprotect(2)` ).
 
 The +1s Language
 =============
