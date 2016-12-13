@@ -4,10 +4,10 @@
 
 int64_t * compile_text_file(FILE* f)
 {
-    char * token;
-    while ( fscanf(f, "%ms", &token) != EOF ) {
+    char token[255];
+    while ( fscanf(f, "%255s", token) != EOF )
+    {
         fprintf(stderr, "%s\n", token);
-        free(token);
     }
     return NULL;
 }
